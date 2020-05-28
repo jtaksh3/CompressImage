@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (isset($_SESSION['email']) || isset($_SESSION['fname']) || isset($_SESSION['lname'])) {
+    // User is not signed in
+    header('Location: ./dashboard.html'); //Redirect to login page
+    exit();
+}
+
+?>
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="./assets/style.css">
@@ -20,21 +29,21 @@
         <div id="signup">   
           <h1>Sign Up Here</h1>
           
-          <form action="/" method="post">
+          <form>
           
           <div class="top-row">
             <div class="field-wrap">
               <label>
                 First Name<span class="req">*</span>
               </label>
-              <input type="text" name="signup-fname" onblur="validateName(this)" required autocomplete="off" />
+              <input type="text" id="signup-fname" onblur="validateName(this)" required autocomplete="off" />
             </div>
         
             <div class="field-wrap">
               <label>
                 Last Name<span class="req">*</span>
               </label>
-              <input type="text" name="signup-lname" onblur="validateName(this)" required autocomplete="off"/>
+              <input type="text" id="signup-lname" onblur="validateName(this)" required autocomplete="off"/>
             </div>
           </div>
 
@@ -42,21 +51,21 @@
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input type="email" name="signup-email" onblur="validateEmail(this)" required autocomplete="off"/>
+            <input type="email" id="signup-email" onblur="validateEmail(this)" required autocomplete="off"/>
           </div>
           
           <div class="field-wrap">
             <label>
               Password<span class="req">*</span>
             </label>
-            <input title="Password must contain atleast 8 Characters. Atleast one (Capital Letter & Small Letter & Numberic & Special Character)" type="password" name="signup-password" onblur="validatePassword(this)" required autocomplete="off"/>
+            <input title="Password must contain atleast 8 Characters. Atleast one (Capital Letter & Small Letter & Numberic & Special Character)" type="password" id="signup-password" onblur="validatePassword(this)" required autocomplete="off"/>
           </div>
 
           <div class="field-wrap">
             <label>
               Confirm Password<span class="req">*</span>
             </label>
-            <input type="password" name="signup-cpassword" onblur="validateCPassword(this)" required autocomplete="off"/>
+            <input type="password" id="signup-cpassword" onblur="validateCPassword(this)" required autocomplete="off"/>
           </div>
           
           <button id="signup-btn" type="submit" class="button button-block"/><i class="fa fa-user-plus" aria-hidden="true"></i> Sign up</button>
@@ -74,14 +83,14 @@
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input type="email" name="signin-email" onblur="validateEmail(this)" required autocomplete="off"/>
+            <input type="email" id="signin-email" onblur="validateEmail(this)" required autocomplete="off"/>
           </div>
           
           <div class="field-wrap more">
             <label>
               Password<span class="req">*</span>
             </label>
-            <input type="password" name="signin-password" onblur="validatePassword(this)" required autocomplete="off"/>
+            <input type="password" id="signin-password" onblur="validatePassword(this)" required autocomplete="off"/>
           </div>
           
           <button id="signin-btn" type="submit" class="button button-block adjust"/><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</button>

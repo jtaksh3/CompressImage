@@ -1,5 +1,5 @@
 $(".form")
-  .find("input, textarea")
+  .find("input")
   .on("keyup blur focus", function (e) {
     var $this = $(this),
       label = $this.prev("label");
@@ -141,7 +141,7 @@ function validatePassword(input) {
 }
 
 function validateCPassword(input) {
-  var first = document.getElementsByName("signup-password").value;
+  var first = document.getElementById("signup-password").value;
 
     if (input.value == first && password_constraint.test(input.value)) {
       //Default border
@@ -149,7 +149,7 @@ function validateCPassword(input) {
 
       } else {
       //red border
-      input.style.borderColor = "#e74c3c";
+      // input.style.borderColor = "#e74c3c";
     }
 }
 
@@ -221,7 +221,7 @@ $("#signup-btn").on("click", function(event) {
 
     //AJAX request for signup form
     $.ajax({
-        url: "./bin/login-register/signup.php",
+        url: "./bin/user/signup.php",
         method: "POST",
         dataType: "json",
         contentType: "application/json",
@@ -278,7 +278,7 @@ $("#signup-btn").on("click", function(event) {
             }
         },
         error: function(request, error) {
-            // showError("Server error. Try again later.");
+
             //Hide loader after receiving request
             $("#signup-btn")
                 .html(
@@ -293,3 +293,79 @@ $("#signup-btn").on("click", function(event) {
 
 //------------------------------------------ SIGNING UP THE USER END ---------------------------------------------------
 
+//----------------------------------------- SIGNING IN THE USER START --------------------------------------------------
+
+$("#signin-btn").on("click", function(event) {
+
+    event.preventDefault();
+
+    let email = $("#sigin-email").val();
+    let password = $("#signin-password").val();
+
+    if (!$.trim(email) || !$.trim(password)) {
+        showError("Felds can't be Empty");
+        return false;
+    }
+
+    //AJAX request for signin form
+    $.ajax({
+        url: "/Assignment/bin/user/signin.php",
+        method: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify({
+            username: username,
+            password: password
+        }),
+        beforeSend: function() {
+            //Show loader before sending ajax request
+            $("#signin-btn")
+                .html('<i class="fa fa-exchange" aria-hidden="true"></i> Please Wait')
+                .css("pointer-events", "none");
+            $("#sigin-email").val("");
+            $("#signin-password").val("");
+        },
+        success: function(response) {
+
+            $("#sigin-email").val("");
+            $("#signin-password").val("");
+
+            if (response.code == "SIGNIN_SUCCESS") {
+                //User credentials has been successfully validated
+                $("#signin-btn")
+                    .html('<i class="fa fa-spinner fa-spin"></i>   Signing in')
+                    .css("pointer-events", "auto");
+                window.location.href = "../dashboard/first-time-details/first-time-details.php";
+
+            } else if (response.code == "SIGNIN_FAILED") {
+                //User has provided invalid credentials or is not registered
+                $("#signin-btn")
+                    .html('<i class="fa fa-user-plus" aria-hidden="true"></i> Sign in')
+                    .css("pointer-events", "auto");
+                showError("Invalid Login Credentials");
+
+            } else if (response.code == "FORM_NOT_SUBMITTED") {
+                //User has not submitted the form
+                $("#signin-btn")
+                    .html('<i class="fa fa-user-plus" aria-hidden="true"></i> Sign in')
+                    .css("pointer-events", "auto");
+                showError("Server error. Try again later.");
+            } else {
+                //Server error
+                $("#signin-btn")
+                    .html('<i class="fa fa-user-plus" aria-hidden="true"></i> Sign in')
+                    .css("pointer-events", "auto");
+                showError("Server error. Try again later.");
+            }
+        },
+        error: function(request, error) {
+
+            $("#signin-btn")
+                .html('<i class="fa fa-user-plus" aria-hidden="true"></i> Sign up')
+                .css("pointer-events", "auto");
+            showError("Server error. Try again later.");
+        }
+    });
+});
+
+//------------------------------------------ SIGNING IN THE USER END ---------------------------------------------------
