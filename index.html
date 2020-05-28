@@ -2,9 +2,12 @@
 <head>
   <link rel="stylesheet" type="text/css" href="./assets/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
+
+  <div id="alert" class="alert"></div>
 
   <div class="form">
 
@@ -24,14 +27,14 @@
               <label>
                 First Name<span class="req">*</span>
               </label>
-              <input type="text" required autocomplete="off" />
+              <input type="text" name="signup-fname" onblur="validateName(this)" required autocomplete="off" />
             </div>
         
             <div class="field-wrap">
               <label>
                 Last Name<span class="req">*</span>
               </label>
-              <input type="text" required autocomplete="off"/>
+              <input type="text" name="signup-lname" onblur="validateName(this)" required autocomplete="off"/>
             </div>
           </div>
 
@@ -39,24 +42,24 @@
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input type="email" required autocomplete="off"/>
+            <input type="email" name="signup-email" onblur="validateEmail(this)" required autocomplete="off"/>
           </div>
           
           <div class="field-wrap">
             <label>
               Password<span class="req">*</span>
             </label>
-            <input type="password" required autocomplete="off"/>
+            <input title="Password must contain atleast 8 Characters. Atleast one (Capital Letter & Small Letter & Numberic & Special Character)" type="password" name="signup-password" onblur="validatePassword(this)" required autocomplete="off"/>
           </div>
 
           <div class="field-wrap">
             <label>
               Confirm Password<span class="req">*</span>
             </label>
-            <input type="password" required autocomplete="off"/>
+            <input type="password" name="signup-cpassword" onblur="validateCPassword(this)" required autocomplete="off"/>
           </div>
           
-          <button type="submit" class="button button-block"/>Sign up</button>
+          <button id="signup-btn" type="submit" class="button button-block"/><i class="fa fa-user-plus" aria-hidden="true"></i> Sign up</button>
           
           </form>
 
@@ -67,21 +70,21 @@
           
           <form action="/" method="post">
           
-            <div class="field-wrap">
+            <div class="field-wrap more">
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input type="email"required autocomplete="off"/>
+            <input type="email" name="signin-email" onblur="validateEmail(this)" required autocomplete="off"/>
           </div>
           
-          <div class="field-wrap">
+          <div class="field-wrap more">
             <label>
               Password<span class="req">*</span>
             </label>
-            <input type="password"required autocomplete="off"/>
+            <input type="password" name="signin-password" onblur="validatePassword(this)" required autocomplete="off"/>
           </div>
           
-          <button class="button button-block"/>Sign In</button>
+          <button id="signin-btn" type="submit" class="button button-block adjust"/><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</button>
           
           </form>
 

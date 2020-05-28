@@ -2,13 +2,15 @@
   box-sizing: border-box;
 }
 
-html {
-  overflow-y: scroll;
-}
-
 body {
-  background: #c1bdba;
-  font-family: 'Titillium Web', sans-serif;
+    font-family: 'Titillium Web', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url(../assets/img/background.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
 }
 .form {
   background: rgba(19, 35, 47, 0.9);
@@ -100,10 +102,8 @@ input {
   width: 100%;
   padding: 5px 10px;
   background: none;
-  background-image: none;
   border: 1px solid #a0b3b0;
   color: #ffffff;
-  border-radius: 0;
   -webkit-transition: border-color .25s ease, box-shadow .25s ease;
   transition: border-color .25s ease, box-shadow .25s ease;
 }
@@ -114,9 +114,11 @@ input:focus {
 
 .field-wrap {
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 28px;
 }
-
+.more {
+  margin-bottom: 35px;
+}
 .top-row:after {
   content: "";
   display: table;
@@ -154,4 +156,38 @@ input:focus {
   display: block;
   margin: auto;
   width: 70%;
+}
+
+.adjust {
+  margin-top: 50px;
+}
+
+.alert {
+  padding: 10px;
+  box-sizing: border-box;
+  border: none;
+  font-size: 16px;
+  position: fixed;
+  top: 0px;
+  width: 300px;
+  height: auto;
+  color: white;
+  left: calc(50% - 150px);
+  text-align: center;
+  display: none;
+  opacity: 0;
+  font-family: "Poppins", sans-serif;
+  z-index: 10;
+}
+
+.error-alert {
+  background-color: rgba(19, 35, 47, 0.9);
+  color: #d8000c;
+  display: block;
+}
+
+.success-alert {
+  background-color: rgba(19, 35, 47, 0.9);
+  color: #270;
+  display: block;
 }
