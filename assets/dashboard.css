@@ -10,6 +10,7 @@ body, html {
 	font-size: 20px;
 	height: 100%;
 	position: relative;
+	background-color: #fafafa;
 }
 
 .clearfix:after {
@@ -116,7 +117,6 @@ header .logo span {
 }
 
 .main-content {
-	background-color: #fafafa;
 	width: calc(100% - 250px);
 	height: 100%;
 	margin-left: 250px;
@@ -246,3 +246,19 @@ header .logo span {
   color: #270;
   display: block;
 }
+
+/*Placeholder Animation Start*/
+::-webkit-input-placeholder { /* Edge */
+    color: #00A5F2;
+    font-size: 12px;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #00A5F2;
+    font-size: 12px;
+}
+::placeholder {
+    color: #00A5F2;
+    font-size: 12px;
+}
+/*Place Holder Animation End*/

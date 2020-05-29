@@ -30,13 +30,15 @@ function onFile() {
         file.type === 'image/jpg') {
 
         //VALIDATE THE FILE SIZE
-        if (file.size < (3000 * 1024)) { 
-            return true;
+        if (file.size < (5000 * 1024)) {
+            return file.size;
         } else {
+            showError('Image size is too big');
             return false;
         }
     } else {
         return false;
+        showError('Not a valid Image type')
     }
 }
 
@@ -98,22 +100,31 @@ function showSuccess(msg) {
 
 //------------------------------------------------- ALERT END ----------------------------------------------------------
 
-function readURL(input) {
+function readURL(input, size, counter) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
             
         reader.onload = function (e) {
             $('#preview-img').attr('src', e.target.result);
             $('.preview').css('display', 'block');
+            $('.preview p').html('Original Size - ' + size + '' + counter);
         }
         reader.readAsDataURL(input.files[0]);
     }
 }
 $("#upload").change(function(){
-    if(onFile())
-        readURL(this);
-    else
-        showError("Not a Valid Image");
+    let size = onFile();
+    let counter = 'B';
+    if(size >= 1024) {
+        counter = 'KB';
+        size /= 1024;
+        if(size >= 1024) {
+            counter = 'MB';
+            size /= 1024;
+        }
+    }
+    if(size)
+        readURL(this, size.toFixed(2), counter);
 });
 
 function validateQuality(input) {
@@ -153,14 +164,25 @@ $("#compress-btn").on("click", function(event) {
 
     success: function(response) {
         response = $.trim(response);
-        showSuccess(response);
       if (response == "UNAUTHORIZED_ACCESS")
           showError(response);
       else if(response == "SERVER_ERROR")
           showError(response);
       else {
         //Server error
-        showError(response);
+        let output = response.split('|');
+        $('.compressed-preview').css('display', 'block');
+        $('.compressed-preview img').attr('src', './bin/user/' + output[0]);
+        let counter = 'B';
+            if(output[1] >= 1024) {
+            counter = 'KB';
+            output[1] /= 1024;
+            if(output[1] >= 1024) {
+                counter = 'MB';
+                output[1] /= 1024;
+            }
+        }
+        $('.compressed-preview p').html('Compressed Size - ' + output[1].toFixed(2) + '' + counter);
       }
     },
   });

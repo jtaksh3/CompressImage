@@ -15,6 +15,10 @@
 
     $quality = $_POST['quality'];
 
+    if(empty($quality)) {
+        $quality = 75;
+    }
+
     if (!file_exists('uploads/'. $email)) {
         mkdir('uploads/' . $email);
     }
@@ -22,7 +26,7 @@
     $fileName = ($_FILES["photo"]["name"]);
          
     $image = $_FILES['photo']['tmp_name'];
-    $fileName = compress_image($image, 'uploads/' . $email . '/' . $fileName, 80);
+    $fileName = compress_image($image, 'uploads/' . $email . '/' . $fileName, $quality);
 
     function compress_image($source, $destination, $quality)
     {
@@ -32,7 +36,9 @@
         elseif ($info['mime'] == 'image/png') $image = imagecreatefrompng($source);
         imagejpeg($image, $destination, $quality);
 
-        exit($destination);
+        $size = filesize($destination);
+
+        exit($destination . '|' . $size);
     }
 
 ?>
