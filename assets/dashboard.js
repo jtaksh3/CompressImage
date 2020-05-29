@@ -14,7 +14,7 @@ $(document).ready(function() {
 	});
 });
 
-//------------------------------------------------ CUSTOM FILE INPUT START ---------------------------------------------
+//------------------------------------------ CUSTOM FILE VALIDATION START ---------------------------------------------
 
 let upload = document.getElementById('upload');
 
@@ -31,7 +31,6 @@ function onFile() {
 
         //VALIDATE THE FILE SIZE
         if (file.size < (3000 * 1024)) { 
-            upload.parentNode.className = 'cntn uploading';
             return true;
         } else {
             return false;
@@ -41,23 +40,7 @@ function onFile() {
     }
 }
 
-upload.addEventListener('dragenter', function (e) {
-    upload.parentNode.className = 'cntn dragging';
-}, false);
-
-upload.addEventListener('dragleave', function (e) {
-    upload.parentNode.className = 'cntn';
-}, false);
-
-upload.addEventListener('dragdrop', function (e) {
-    onFile();
-}, false);
-
-upload.addEventListener('change', function (e) {
-    onFile();
-}, false);
-
-//------------------------------------------------ CUSTOM FILE INPUT END ---------------------------------------------
+//--------------------------------------------- CUSTOM FILE VALIDATION END ---------------------------------------------
 
 //------------------------------------------------ ALERT START ---------------------------------------------------------
 
@@ -121,17 +104,21 @@ function readURL(input) {
             
         reader.onload = function (e) {
             $('#preview-img').attr('src', e.target.result);
-            // $('#profile-img-tag').css('display', 'block');
             $('.preview').css('display', 'block');
         }
         reader.readAsDataURL(input.files[0]);
     }
 }
 $("#upload").change(function(){
-    readURL(this);
+    if(onFile())
+        readURL(this);
+    else
+        showError("Not a Valid Image");
 });
 
 function validateQuality(input) {
+    
+    // if(input.value > 0) {
 
     if (input.value <= 100) {
       //Default border
@@ -141,12 +128,16 @@ function validateQuality(input) {
       //red border
       input.style.borderColor = "#e74c3c";
     }
+ 
+    // }
 }
 
 $("#compress-btn").on("click", function(event) {
     event.preventDefault();
 
-    if ($.trim($('input[name="quality"]').val()) > 100 || !$.trim($('input[name="quality"]').val())) {
+    if ($.trim($('input[name="quality"]').val()) > 0 
+        && ($.trim($('input[name="quality"]').val()) > 100 
+        || !$.isNumeric($('input[name="quality"]').val()))) {
     	showError("Please enter the Correct Compression Quality.")
     	return false;
     }
@@ -154,7 +145,7 @@ $("#compress-btn").on("click", function(event) {
     //AJAX request for details form
     $.ajax({
       type: "POST",
-      url: "/Project/bin/user/compress.php",
+      url: "/Assignment/bin/user/compress.php",
       cache: false,
       processData: false,
       contentType: false,
@@ -162,9 +153,12 @@ $("#compress-btn").on("click", function(event) {
 
     success: function(response) {
         response = $.trim(response);
-      if (response == "COMPRESS_SUCCESS") {
-       
-      } else {
+        showSuccess(response);
+      if (response == "UNAUTHORIZED_ACCESS")
+          showError(response);
+      else if(response == "SERVER_ERROR")
+          showError(response);
+      else {
         //Server error
         showError(response);
       }

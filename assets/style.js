@@ -221,7 +221,7 @@ $("#signup-btn").on("click", function(event) {
 
     //AJAX request for signup form
     $.ajax({
-        url: "./bin/user/signup.php",
+        url: "/Assignment/bin/user/signup.php",
         method: "POST",
         dataType: "json",
         contentType: "application/json",
@@ -285,7 +285,7 @@ $("#signup-btn").on("click", function(event) {
                     '<i class="fa fa-user-plus" aria-hidden="true"></i> Sign up'
                 )
                 .css("pointer-events", "auto");
-            showError("Server error. Try again later.");
+            showError("Server error. nu Try again later.");
 
         }
     });
@@ -299,7 +299,7 @@ $("#signin-btn").on("click", function(event) {
 
     event.preventDefault();
 
-    let email = $("#sigin-email").val();
+    let email = $("#signin-email").val();
     let password = $("#signin-password").val();
 
     if (!$.trim(email) || !$.trim(password)) {
@@ -314,7 +314,7 @@ $("#signin-btn").on("click", function(event) {
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify({
-            username: username,
+            email: email,
             password: password
         }),
         beforeSend: function() {
@@ -335,7 +335,7 @@ $("#signin-btn").on("click", function(event) {
                 $("#signin-btn")
                     .html('<i class="fa fa-spinner fa-spin"></i>   Signing in')
                     .css("pointer-events", "auto");
-                window.location.href = "../dashboard/first-time-details/first-time-details.php";
+                window.location.href = "./dashboard.html";
 
             } else if (response.code == "SIGNIN_FAILED") {
                 //User has provided invalid credentials or is not registered

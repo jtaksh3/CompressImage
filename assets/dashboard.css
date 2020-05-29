@@ -154,18 +154,14 @@ header .logo span {
     text-align: center;
 }
 .cntn input {
-   width: 280px;
+    width: 385px;
     height: 100%;
-    margin-left: -80px;
+    margin-left: -85px;
     border: none;
     opacity: 0;
     cursor: pointer;
 }
 
-.cntn .spinner {
-    display: none;
-    margin-top: 50%;
-}
 .preview {
 	display: none;
 	margin: 20px auto;

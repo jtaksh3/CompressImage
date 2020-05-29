@@ -1,6 +1,6 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/Project/bin/config/database.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Assignment/bin/config/database.php';
 
 class User
 {

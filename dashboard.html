@@ -22,7 +22,7 @@
 			</nav>
 		</div>
 
-		<div class="main-content">
+		<div class="main-content" id="first-page">
 			<h1>Upload</h1>
 			<p>Your File</p>
 			<div class="panel-wrapper">
@@ -32,14 +32,14 @@
 				<div class="panel-body">
 					<form>
                         <div class="cntn">
-                            <input name="avatar" type="file" id="upload" style="cursor: pointer;" />
+                            <input name="photo" type="file" id="upload" style="cursor: pointer;" />
                         </div>
-					</form>
-					<div class="preview">
-						<img src="" id="preview-img"/>
-						<input type="text" name="quality" onblur="validateQuality(this)" class="quality-input" placeholder="Enter Compression Quality(in %)">
-					    <button id="compress-btn" type="submit" class="button button-block"/>Compress</button>
+                        <div class="preview">
+						    <img src="" id="preview-img"/>
+						    <input type="number" name="quality" onblur="validateQuality(this)" class="quality-input" placeholder="Enter Compression Quality(Default - 75)">
+					        <button id="compress-btn" type="submit" class="button button-block"/>Compress</button>
 					</div>
+					</form>
 				</div>
 			</div>
 			<div class="panel-wrapper">
