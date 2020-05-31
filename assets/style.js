@@ -149,8 +149,17 @@ function validateCPassword(input) {
 
       } else {
       //red border
-      // input.style.borderColor = "#e74c3c";
+      input.style.borderColor = "#e74c3c";
     }
+}
+
+function visible() {
+  var x = document.getElementById("signup-password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
 }
 
 //-------------------------------------------- ONBLUR VALIDATION END ----------------------------------------------------

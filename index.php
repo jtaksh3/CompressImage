@@ -1,17 +1,17 @@
 <?php
-session_start();
-if (isset($_SESSION['email']) || isset($_SESSION['fname']) || isset($_SESSION['lname'])) {
-    // User is not signed in
-    header('Location: ./dashboard.html'); //Redirect to login page
-    exit();
-}
+// session_start();
+// if (isset($_SESSION['email']) || isset($_SESSION['fname']) || isset($_SESSION['lname'])) {
+//     // User is not signed in
+//     header('Location: ./dashboard.html'); //Redirect to login page
+//     exit();
+// }
 
 ?>
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="./assets/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
 </head>
 
 <body>
@@ -59,6 +59,7 @@ if (isset($_SESSION['email']) || isset($_SESSION['fname']) || isset($_SESSION['l
               Password<span class="req">*</span>
             </label>
             <input title="Password must contain atleast 8 Characters. Atleast one (Capital Letter & Small Letter & Numberic & Special Character)" type="password" id="signup-password" onblur="validatePassword(this)" required autocomplete="off"/>
+            <i class="fas fa-eye" onclick="visible()" style="float: right; margin-top: -28px; margin-right: 8px; cursor: pointer;"></i>
           </div>
 
           <div class="field-wrap">
@@ -66,6 +67,7 @@ if (isset($_SESSION['email']) || isset($_SESSION['fname']) || isset($_SESSION['l
               Confirm Password<span class="req">*</span>
             </label>
             <input type="password" id="signup-cpassword" onblur="validateCPassword(this)" required autocomplete="off"/>
+            <i class="fas fa-eye" onclick="visible()" style="float: right; margin-top: -28px; margin-right: 8px; cursor: pointer;"></i>
           </div>
           
           <button id="signup-btn" type="submit" class="button button-block"/><i class="fa fa-user-plus" aria-hidden="true"></i> Sign up</button>

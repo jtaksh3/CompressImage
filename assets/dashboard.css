@@ -109,6 +109,7 @@ header .logo span {
 }
 
 .sidebar nav ul li a {
+	display: block;
 	color: #D7D5D5;
 }
 

@@ -189,3 +189,16 @@ $("#compress-btn").on("click", function(event) {
 });
 
 //----------------------------------------- AJAX REQUEST TO SUBMIT FORM END ---------------------------------------
+
+// Make AJAX request to logout
+$("#logout").on("click", function() {
+    $.ajax({
+        url: "./bin/user/logout.php",
+        method: "POST",
+        dataType: "text",
+        data: {},
+        success: function(response) {
+            window.location.href = "./index.php";
+        }
+    });
+});
