@@ -59,7 +59,7 @@
               Password<span class="req">*</span>
             </label>
             <input title="Password must contain atleast 8 Characters. Atleast one (Capital Letter & Small Letter & Numberic & Special Character)" type="password" id="signup-password" onblur="validatePassword(this)" required autocomplete="off"/>
-            <i class="fas fa-eye" onclick="visible()" style="float: right; margin-top: -28px; margin-right: 8px; cursor: pointer;"></i>
+            <i id="toggle-signup-password" class="fas fa-eye" onclick="togglePassword()" style="float: right; margin-top: -28px; margin-right: 8px; cursor: pointer;"></i>
           </div>
 
           <div class="field-wrap">
@@ -67,7 +67,7 @@
               Confirm Password<span class="req">*</span>
             </label>
             <input type="password" id="signup-cpassword" onblur="validateCPassword(this)" required autocomplete="off"/>
-            <i class="fas fa-eye" onclick="visible()" style="float: right; margin-top: -28px; margin-right: 8px; cursor: pointer;"></i>
+            <i id="toggle-signup-cpassword" class="fas fa-eye" onclick="toggleCPassword()" style="float: right; margin-top: -28px; margin-right: 8px; cursor: pointer;"></i>
           </div>
           
           <button id="signup-btn" type="submit" class="button button-block"/><i class="fa fa-user-plus" aria-hidden="true"></i> Sign up</button>
@@ -93,6 +93,7 @@
               Password<span class="req">*</span>
             </label>
             <input type="password" id="signin-password" onblur="validatePassword(this)" required autocomplete="off"/>
+            <i id="toggle-signin-password" class="fas fa-eye" onclick="toggleSPassword()" style="float: right; margin-top: -28px; margin-right: 8px; cursor: pointer;"></i>
           </div>
           
           <button id="signin-btn" type="submit" class="button button-block adjust"/><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</button>
@@ -105,7 +106,7 @@
       
 </div>
 
-<script type="text/javascript" src="./assets/style.js"></script>
+<script src="./assets/style.js"></script>
 
 </body>
 

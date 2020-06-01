@@ -153,15 +153,47 @@ function validateCPassword(input) {
     }
 }
 
-function visible() {
+function togglePassword() {
   var x = document.getElementById("signup-password");
+  var y = document.getElementById("toggle-signup-password");
   if (x.type === "password") {
+    y.classList.remove("fa-eye");
+    y.classList.add("fa-eye-slash");
     x.type = "text";
   } else {
+    y.classList.remove("fa-eye-slash");
+    y.classList.add("fa-eye");
     x.type = "password";
   }
 }
 
+function toggleCPassword() {
+  var x = document.getElementById("signup-cpassword");
+  var y = document.getElementById("toggle-signup-cpassword");
+  if (x.type === "password") {
+    y.classList.remove("fa-eye");
+    y.classList.add("fa-eye-slash");
+    x.type = "text";
+  } else {
+    y.classList.remove("fa-eye-slash");
+    y.classList.add("fa-eye");
+    x.type = "password";
+  }
+}
+
+function toggleSPassword() {
+  var x = document.getElementById("signin-password");
+  var y = document.getElementById("toggle-signin-password");
+  if (x.type === "password") {
+    y.classList.remove("fa-eye");
+    y.classList.add("fa-eye-slash");
+    x.type = "text";
+  } else {
+    y.classList.remove("fa-eye-slash");
+    y.classList.add("fa-eye");
+    x.type = "password";
+  }
+}
 //-------------------------------------------- ONBLUR VALIDATION END ----------------------------------------------------
 
 //--------------------------------------- FORM VALIDATION ON SUBMIT START -----------------------------------------------
