@@ -101,6 +101,10 @@ header .logo span {
 	color: #fff;
 }
 
+.sidebar nav ul li a {
+	display: block;
+}
+
 .sidebar nav ul li.active {
 	background-color: #2980b9;
 }

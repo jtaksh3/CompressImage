@@ -7,7 +7,6 @@ class User
     private $conn;
 
     private $login_credentials = "Login_Credentials";
-    private $user_images = "Image";
 
     private $email;
     private $password;
@@ -67,7 +66,7 @@ class User
     // Function to signup the user
     public function signup()
     {
-        if ($this->doesAlreadyExist()) {
+        if ($this->doesUserAlreadyExist()) {
             return 'USER_ALREADY_EXIST';
         }
 
@@ -95,14 +94,12 @@ class User
 
         //Execute Query
         if ($stmt->execute()) {
+            $sql = "CREATE TABLE `" . $this->email . "`
+            (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            Image VARCHAR(255) NOT NULL)";
+            $this->conn->exec($sql);
 
-            $img_query = "INSERT INTO " . $this->user_images . "(Email) VALUES (:email)";
-            $img_stmt = $this->conn->prepare($img_query);
-            $img_stmt->bindParam(":email", $this->email);
-            if ($img_stmt->execute() == false) 
-                return 'SIGNUP_FAILED';
-            else 
-                return 'SIGNUP_SUCCESS';
+            return 'SIGNUP_SUCCESS';
         }
         return 'SIGNUP_FAILED';
     }
@@ -141,7 +138,7 @@ class User
     }
 
     // Function to check if the user already exist in db or not
-    public function doesAlreadyExist()
+    public function doesUserAlreadyExist()
     {
         $query = "SELECT Email FROM " . $this->login_credentials . " WHERE Email='" . $this->email . "'";
         // Prepare query statement
@@ -158,7 +155,7 @@ class User
 
     public function getProfileDetails()
     {
-        $user_query = "SELECT * FROM " . $this->login_credentials . " WHERE Email='" . $this->email . "'";
+        $user_query = "SELECT FName, LName, Email, Created FROM " . $this->login_credentials . " WHERE Email='" . $this->email . "'";
 
         // Prepare personal details query statement
         $stmt = $this->conn->prepare($user_query);
@@ -168,4 +165,33 @@ class User
         return array("profile" => $profileDetails);
     }
 
+    public function uploadImage($image) {
+        if(!doesImageExistAlready($image)) {
+            $img_query = "INSERT INTO " . $this->Email . "(Image) VALUES (:image)";
+            $img_stmt = $this->conn->prepare($img_query);
+
+            $stmt->bindParam(":image", $image);
+
+            // Execute query
+            if (img_stmt->execute() == false)
+                return false;
+            else
+                return true;
+        }
+        return true;
+    }
+
+    public function doesImageExistAlready($image) {
+        $img_query = "SELECT id FROM " . $this->Email . " WHERE Image='" . $image . "'";
+        // Prepare query statement
+        $stmt = $this->conn->prepare($query);
+        // Execute query
+        $stmt->execute();
+        // Fetch a row
+        $result = $stmt->fetch();
+        // If nothing is returned, $result will be false
+        if ($result == false)
+            return false;
+        return true;
+    }
 }

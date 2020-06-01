@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION['email']) || !isset($_SESSION['fname']) || !isset($_SESSION['lname'])) {
+    // User is not signed in
+    header('Location: ./index.php'); //Redirect to login page
+    exit();
+}
+?>
+
 <html>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -13,8 +22,8 @@
 			<nav>
 				<a href="#">Compress<span>Image</span></a>
 				<ul>
-					<li id="profile-li" onclick="activeProfile()">Profile</li>
-					<li id="compress-li" onclick="activeCompress()">Compress</li>
+					<li class="side-tab active"><a href="#profile">Profile</a></li>
+                    <li class="side-tab"><a href="#compress">Compress</a></li>
 					<li id="logout">Log out</li>
 				</ul>
 			</nav>

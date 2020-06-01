@@ -169,7 +169,7 @@ $("#compress-btn").on("click", function(event) {
       else if(response == "SERVER_ERROR")
           showError(response);
       else {
-        //Server error
+        //Success
         let output = response.split('|');
         $('.compressed-preview').css('display', 'block');
         $('.compressed-preview img').attr('src', './bin/user/' + output[0]);
@@ -203,21 +203,17 @@ $("#logout").on("click", function() {
     });
 });
 
-function activeProfile() {
-    var x = document.getElementById("profile-li");
-    var y = document.getElementById("compress-li");
-    y.classList.remove('active');
-    x.classList.add('active');
-    window.location.replace("./dashboard.html#profile");
-}
+$(".side-tab a").on("click", function (e) {
+  e.preventDefault();
 
-function activeCompress() {
-    var x = document.getElementById("profile-li");
-    var y = document.getElementById("compress-li");
-    x.classList.remove('active');
-    y.classList.add('active');
-    window.location.replace("./dashboard.html#compress");
-}
+  $(this).parent().addClass("active");
+  $(this).parent().siblings().removeClass("active");
+
+  target = $(this).attr("href");
+
+  window.location.href = "./dashboard.php"+target;
+
+});
 
 // Make AJAX request to fetch user personal and college details
 $.ajax({
@@ -232,6 +228,43 @@ $.ajax({
 
     if (response.status == 1) {
       var profileDetails = response.data.profile;
+
+      $('input[name="fname"]').val(profileDetails.FName);
+      $('input[name="lname"]').val(profileDetails.LName);
+      $('input[name="email"]').val(profileDetails.Email);
+      var output = profileDetails.Created.split(" ");
+      $('input[name="date"]').val(output[0]);
+      $('input[name="time"]').val(output[1]);
     }
   }
+});
+
+$("#upload-btn").on("click", function(event) {
+    event.preventDefault();
+
+    let imageloc = $('.compressed-preview img').prop('src');
+
+    AJAX request for details form
+    $.ajax({
+      type: "POST",
+      url: "./bin/user/upload.php",
+      cache: false,
+      processData: false,
+      contentType: false,
+      data: imageloc: imageloc,
+
+    success: function(response) {
+        response = $.trim(response);
+      if (response == "UNAUTHORIZED_ACCESS")
+          showError(response);
+      else if(response == "SERVER_ERROR")
+          showError(response);
+      else if(response == "Failed")
+          showError(response);
+      else {
+        //Success
+        showSuccess("Compressed Image has been Successfully Uploaded");
+      }
+    },
+  });
 });

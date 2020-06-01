@@ -326,7 +326,7 @@ $("#signup-btn").on("click", function(event) {
                     '<i class="fa fa-user-plus" aria-hidden="true"></i> Sign up'
                 )
                 .css("pointer-events", "auto");
-            showError("Server error. nu Try again later.");
+            showError("Server error. Try again later.");
 
         }
     });
@@ -376,7 +376,7 @@ $("#signin-btn").on("click", function(event) {
                 $("#signin-btn")
                     .html('<i class="fa fa-spinner fa-spin"></i>   Signing in')
                     .css("pointer-events", "auto");
-                window.location.href = "./dashboard.html";
+                window.location.href = "./dashboard.php";
 
             } else if (response.code == "SIGNIN_FAILED") {
                 //User has provided invalid credentials or is not registered
@@ -402,7 +402,7 @@ $("#signin-btn").on("click", function(event) {
         error: function(request, error) {
 
             $("#signin-btn")
-                .html('<i class="fa fa-user-plus" aria-hidden="true"></i> Sign up')
+                .html('<i class="fa fa-user-plus" aria-hidden="true"></i> Sign in')
                 .css("pointer-events", "auto");
             showError("Server error. Try again later.");
         }
