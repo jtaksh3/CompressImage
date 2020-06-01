@@ -95,9 +95,10 @@ header .logo span {
 .sidebar nav ul li {
 	font-size: 70%;
 	padding: 19px 0;	
-	padding-left: 20px;
+	padding-left: 50px;
 	border-bottom: 0.5px solid #111;
 	cursor: pointer;
+	color: #fff;
 }
 
 .sidebar nav ul li.active {
@@ -108,14 +109,6 @@ header .logo span {
 	background-color: #2980b9;
 }
 
-.sidebar nav ul li a {
-	display: block;
-	color: #D7D5D5;
-}
-
-.sidebar nav ul li:hover a{
-	color: #fff;
-}
 
 .main-content {
 	width: calc(100% - 250px);
@@ -263,3 +256,39 @@ header .logo span {
     font-size: 12px;
 }
 /*Place Holder Animation End*/
+
+.details-table {
+	border-collapse: collapse;
+	margin: 10px 20px;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.details-table tr:nth-child(odd) {
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
+}
+
+.details-table th {
+	padding: 30px 40px;
+	text-align: center;
+	font-size: 18px;
+	background-color: #00A5F2;
+	color: #fff;
+	font-weight: 400;
+}
+
+.details-table td {
+	font-size: 16px;
+	padding: 30px 50px;
+}
+
+.details-table input {
+	font-family: "Poppins", sans-serif;
+	font-size: 16px;
+	font-weight: 600px;
+	background: none;
+	border: none;
+	color: #00A5F2;
+	width: 100%;
+	text-align: center;
+}

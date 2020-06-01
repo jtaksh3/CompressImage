@@ -13,20 +13,39 @@
 			<nav>
 				<a href="#">Compress<span>Image</span></a>
 				<ul>
-					<li><a href="#Profile">Profile</a></li>
-					<li class="active"><a href="#Upload">Compress</a></li>
-					<li id="logout"><a href="">Log out</a></li>
+					<li id="profile-li" onclick="activeProfile()">Profile</li>
+					<li id="compress-li" onclick="activeCompress()">Compress</li>
+					<li id="logout">Log out</li>
 				</ul>
 			</nav>
 		</div>
 
-		<div class="main-content" id="Profile">
+		<div class="main-content" id="profile">
 			<div class="panel-wrapper">
 				<div class="panel-head">
 					Your Profile
 				</div>
 				<div class="panel-body">
-
+					<table id="personal-details" class="details-table">
+							<tr>
+								<th scope="row">First Name</th>
+								<td colspan="2"><input type="text" name="fname" placeholder="First Name" disabled value="" required></td>
+								<th scope="row">Last Name</th>
+								<td><input type="text" name="lname" placeholder="Last Name" disabled value="" required></td>
+							</tr>
+							<tr>
+								<th scope="row">E-mail</th>
+								<td colspan="2"><input type="email" name="email" placeholder="Email" disabled value="" required></td>
+								<th scope="row">Photos Uploaded</th>
+								<td><input type="text" name="photoscount" placeholder="No. of Photos" disabled value="" required></td>
+							</tr>
+							<tr>
+								<th scope="row">Joined on</th>
+								<td colspan="2"><input type="text" name="date" placeholder="Date" disabled value="" required></td>
+								<th scope="row">At</th>
+								<td><input type="text" name="time" placeholder="Time" disabled value="" required></td>
+							</tr>
+						</table>
 				</div>
 			</div>
 			<div class="panel-wrapper">
@@ -43,7 +62,7 @@
 			</div>
 		</div>
 
-		<div class="main-content" id="Upload">
+		<div class="main-content" id="compress">
 			<h1>Compress</h1>
 			<p>Your File (upto 5MB)</p>
 			<div class="panel-wrapper">

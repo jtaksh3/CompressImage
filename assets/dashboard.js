@@ -30,7 +30,7 @@ function onFile() {
         file.type === 'image/jpg') {
 
         //VALIDATE THE FILE SIZE
-        if (file.size < (5000 * 1024)) {
+        if (file.size < (5000 * 1000)) {
             return file.size;
         } else {
             showError('Image size is too big');
@@ -115,12 +115,12 @@ function readURL(input, size, counter) {
 $("#upload").change(function(){
     let size = onFile();
     let counter = 'B';
-    if(size >= 1024) {
+    if(size >= 1000) {
         counter = 'KB';
-        size /= 1024;
-        if(size >= 1024) {
+        size /= 1000;
+        if(size >= 1000) {
             counter = 'MB';
-            size /= 1024;
+            size /= 1000;
         }
     }
     if(size)
@@ -174,12 +174,12 @@ $("#compress-btn").on("click", function(event) {
         $('.compressed-preview').css('display', 'block');
         $('.compressed-preview img').attr('src', './bin/user/' + output[0]);
         let counter = 'B';
-            if(output[1] >= 1024) {
+            if(output[1] >= 1000) {
             counter = 'KB';
-            output[1] /= 1024;
-            if(output[1] >= 1024) {
+            output[1] /= 1000;
+            if(output[1] >= 1000) {
                 counter = 'MB';
-                output[1] /= 1024;
+                output[1] /= 1000;
             }
         }
         $('.compressed-preview p').html('Compressed Size - ' + output[1].toFixed(2) + '' + counter);
@@ -201,4 +201,37 @@ $("#logout").on("click", function() {
             window.location.href = "./index.php";
         }
     });
+});
+
+function activeProfile() {
+    var x = document.getElementById("profile-li");
+    var y = document.getElementById("compress-li");
+    y.classList.remove('active');
+    x.classList.add('active');
+    window.location.replace("./dashboard.html#profile");
+}
+
+function activeCompress() {
+    var x = document.getElementById("profile-li");
+    var y = document.getElementById("compress-li");
+    x.classList.remove('active');
+    y.classList.add('active');
+    window.location.replace("./dashboard.html#compress");
+}
+
+// Make AJAX request to fetch user personal and college details
+$.ajax({
+  url: "./bin/user/process-profile.php",
+  method: "GET",
+  dataType: "json",
+  contentType: "application/json",
+  data: {
+    getProfileDetails: true
+  },
+  success: function(response) {
+
+    if (response.status == 1) {
+      var profileDetails = response.data.profile;
+    }
+  }
 });

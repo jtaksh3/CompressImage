@@ -7,7 +7,7 @@ class User
     private $conn;
 
     private $login_credentials = "Login_Credentials";
-    private $user_per_details = "Image";
+    private $user_images = "Image";
 
     private $email;
     private $password;
@@ -96,10 +96,10 @@ class User
         //Execute Query
         if ($stmt->execute()) {
 
-            $per_query = "INSERT INTO " . $this->user_per_details . "(Email) VALUES (:email)";
-            $per_stmt = $this->conn->prepare($per_query);
-            $per_stmt->bindParam(":email", $this->email);
-            if ($per_stmt->execute() == false) 
+            $img_query = "INSERT INTO " . $this->user_images . "(Email) VALUES (:email)";
+            $img_stmt = $this->conn->prepare($img_query);
+            $img_stmt->bindParam(":email", $this->email);
+            if ($img_stmt->execute() == false) 
                 return 'SIGNUP_FAILED';
             else 
                 return 'SIGNUP_SUCCESS';
@@ -154,6 +154,18 @@ class User
         if ($result == false)
             return false;
         return true;
+    }
+
+    public function getProfileDetails()
+    {
+        $user_query = "SELECT * FROM " . $this->login_credentials . " WHERE Email='" . $this->email . "'";
+
+        // Prepare personal details query statement
+        $stmt = $this->conn->prepare($user_query);
+        $stmt->execute();
+        $profileDetails = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return array("profile" => $profileDetails);
     }
 
 }
