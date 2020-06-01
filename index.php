@@ -1,14 +1,15 @@
 <?php
-// session_start();
-// if (isset($_SESSION['email']) || isset($_SESSION['fname']) || isset($_SESSION['lname'])) {
-//     // User is not signed in
-//     header('Location: ./dashboard.html'); //Redirect to login page
-//     exit();
-// }
+session_start();
+if (isset($_SESSION['email']) || isset($_SESSION['fname']) || isset($_SESSION['lname'])) {
+    // User is not signed in
+    header('Location: ./dashboard.html'); //Redirect to login page
+    exit();
+}
 
 ?>
 <html>
 <head>
+  <meta http-equiv="Cache-control" content="no-cache">
   <link rel="stylesheet" type="text/css" href="./assets/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />

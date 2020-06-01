@@ -166,25 +166,27 @@ class User
     }
 
     public function uploadImage($image) {
-        if(!doesImageExistAlready($image)) {
-            $img_query = "INSERT INTO " . $this->Email . "(Image) VALUES (:image)";
-            $img_stmt = $this->conn->prepare($img_query);
+        if($this->doesImageExistAlready($image))
+            return true;
 
-            $stmt->bindParam(":image", $image);
+        $img_query = "INSERT INTO `" . $this->email . "` (Image) VALUES(:image)";
 
-            // Execute query
-            if (img_stmt->execute() == false)
-                return false;
-            else
-                return true;
-        }
-        return true;
+        $img_stmt = $this->conn->prepare($img_query);
+
+        $img_stmt->bindParam(":image", $image);
+
+        // Execute query
+        if ($img_stmt->execute() == false)
+            return false;
+        else
+            return true;
+        
     }
 
     public function doesImageExistAlready($image) {
-        $img_query = "SELECT id FROM " . $this->Email . " WHERE Image='" . $image . "'";
+        $img_query = "SELECT id FROM `" . $this->email . "` WHERE Image='" . $image . "'";
         // Prepare query statement
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->conn->prepare($img_query);
         // Execute query
         $stmt->execute();
         // Fetch a row
@@ -193,5 +195,17 @@ class User
         if ($result == false)
             return false;
         return true;
+    }
+
+        public function getImages()
+    {
+        $img_query = "SELECT Image FROM `" . $this->email . "`";
+
+        // Prepare personal details query statement
+        $stmt = $this->conn->prepare($img_query);
+        $stmt->execute();
+        $images = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        return array("images" => $images);
     }
 }

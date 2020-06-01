@@ -4,7 +4,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Assignment/bin/config/database.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Assignment/bin/user/user.php';
 
     session_start();
-    if (!isset($_SESSION['email'])) {
+    if (!isset($_SESSION['email']) || !isset($_SESSION['fname']) || !isset($_SESSION['lname'])) {
         // User is not signed in
         exit('UNAUTHORIZED_ACCESS');
     }
@@ -26,7 +26,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Assignment/bin/user/user.php';
 
     $user->setEmail($email);
 
-    if($user->uploadImage()) {
+    if($user->uploadImage($image)) {
         exit('Success');
     }
     exit('Failed');

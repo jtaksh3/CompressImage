@@ -203,18 +203,6 @@ $("#logout").on("click", function() {
     });
 });
 
-$(".side-tab a").on("click", function (e) {
-  e.preventDefault();
-
-  $(this).parent().addClass("active");
-  $(this).parent().siblings().removeClass("active");
-
-  target = $(this).attr("href");
-
-  window.location.href = "./dashboard.php"+target;
-
-});
-
 // Make AJAX request to fetch user personal and college details
 $.ajax({
   url: "./bin/user/process-profile.php",
@@ -228,10 +216,26 @@ $.ajax({
 
     if (response.status == 1) {
       var profileDetails = response.data.profile;
+      var images = response.uploaded.images;
+
+      var i = 0;
+
+      while (images[i]) {
+          var x = document.createElement("IMG");
+          x.setAttribute("src", images[i]);
+          x.setAttribute("width", "250");
+          x.setAttribute("height", "350");
+          x.style.margin = "15px 40px";
+          document.getElementById("uploaded-preview").appendChild(x);
+          i++;
+      }
+
+      // $('.uploaded-preview img').attr('src', images[1]);
 
       $('input[name="fname"]').val(profileDetails.FName);
       $('input[name="lname"]').val(profileDetails.LName);
       $('input[name="email"]').val(profileDetails.Email);
+      $('input[name="photoscount"]').val(i);
       var output = profileDetails.Created.split(" ");
       $('input[name="date"]').val(output[0]);
       $('input[name="time"]').val(output[1]);
@@ -244,14 +248,13 @@ $("#upload-btn").on("click", function(event) {
 
     let imageloc = $('.compressed-preview img').prop('src');
 
-    AJAX request for details form
+    // AJAX request for details form
     $.ajax({
       type: "POST",
       url: "./bin/user/upload.php",
-      cache: false,
-      processData: false,
-      contentType: false,
-      data: imageloc: imageloc,
+      data: {
+        imageloc: imageloc
+      },
 
     success: function(response) {
         response = $.trim(response);
@@ -263,6 +266,8 @@ $("#upload-btn").on("click", function(event) {
           showError(response);
       else {
         //Success
+        $('.compressed-preview').css('display', 'none');
+        $('.preview').css('display', 'none');
         showSuccess("Compressed Image has been Successfully Uploaded");
       }
     },

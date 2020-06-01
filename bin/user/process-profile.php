@@ -25,6 +25,7 @@ $user->setEmail($email);
 
 if (isset($_GET['getProfileDetails'])) {
     $details = $user->getProfileDetails();
-    exit(json_encode(array("status" => 1, "data" => $details)));
+    $images = $user->getImages();
+    exit(json_encode(array("status" => 1, "data" => $details, "uploaded" => $images)));
 }
 exit(json_encode(array("status" => 0))); // Status 0 means request failed

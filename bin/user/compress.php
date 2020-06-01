@@ -1,7 +1,7 @@
 <?php 
 
     session_start();
-    if (!isset($_SESSION['email'])) {
+    if (!isset($_SESSION['email']) || !isset($_SESSION['fname']) || !isset($_SESSION['lname'])) {
         // User is not signed in
         exit('UNAUTHORIZED_ACCESS');
     }
